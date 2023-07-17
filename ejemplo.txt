@@ -1,1 +1,17 @@
-asljnasjkdasd
+Patrick:
+adapter y facthory method donde en resumen pues es un sistema mejorado de productos de nestle, mostrando precios, ofertas, productos, etc.
+Juan Jose:
+yo usé el Singleton para asignar un gestor de personal para una determinada sede en Walmart y el Proxy para contf
+controlar el sobrestock
+Leonardo Castañeda:
+Use el factory para gestionar los buques pesqueros de Hayduk, pero no me alcanzo tiempo para hacer un estuctural, iba a hacer un decorator para sus fabricas
+Rodrigo:
+Yo hice del abstracto factory y el mio era una fábrica de calzado masculino con femenino y luego zapato o zapatilla
+El otro fue un fackade para realizar una compra
+Yionel:
+En mi caso use el Factory y el Proxy 
+El caso era el sistema de inventario de inkafarma, como sabemos en la época de pandemia no hubo un buen control de abastecimiento de productos ya que en parte dificultaba el hecho de saber cuándo una sucursal estaba sin producto y necesitaba llamar al proveedor y así entonces ahí use el Factory para llamar una clase que cada vez que no hayan productos (menos de un tanto porcentaje) llame al proveedor y así
+Joseph:
+Sobre falabella:
+-Gestión compleja de pedidos en línea, se aplicó facade como interfaz simplificada para realizar pedidos.
+-Falta de un enfoque flexible para construir objetos, se aplicó builder para fácil adición de productos y creación de productos paso a paso
