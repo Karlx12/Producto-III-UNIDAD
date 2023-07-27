@@ -67,6 +67,6 @@ public class Producto {
     public double getPrecio() {
         return precio;
     }
-    
+
 
 }
