@@ -1,10 +1,12 @@
 package Controlador;
 
 
+import Modelo.Cliente;
+import Modelo.Producto;
 import java.util.ArrayList;
 import java.util.List;
 // Patrón creacional - Builder
-public class Orden {
+public class Orden  {
     private List<Producto> productos;
     private Cliente cliente;
     private Dirección direcciónEnvio;
@@ -38,25 +40,26 @@ public class Orden {
     public TipoCompra getTipoCompra() {
         return this.tipoCompra;
     }
+
     
-    public enum TipoCompra {
-        RECOJO_TIENDA,
-        ENVIO_DOMICILIO
-    }
+//    public enum TipoCompra {
+//        RECOJO_TIENDA,
+//        ENVIO_DOMICILIO
+//    }
     
-    public static class OrdenBuilder implements OrdenBuilderInterface {
+    public static class OrdenBuilder  implements OrdenBuilderInterface{
 
         private List<Producto> productos;
         private Cliente cliente;
         private Dirección direcciónEnvio;
         private Dirección facturaciónEnvio;
-        private TipoCompra tipoCompra;
+//        private TipoCompra tipoCompra;
 
         public OrdenBuilder() {
             this.productos = new ArrayList<>();
         }
 
-         @Override
+        @Override
         public OrdenBuilder addProducto(Producto producto) {
             this.productos.add(producto);
             return this;
@@ -68,10 +71,6 @@ public class Orden {
             return this;
         }
         
-        public OrdenBuilder setTipoCompra(TipoCompra tipoCompra) {
-            this.tipoCompra = tipoCompra;
-            return this;
-        }
 
         @Override
         public OrdenBuilder setDirecciónEnvio(Dirección direcciónEnvio) {

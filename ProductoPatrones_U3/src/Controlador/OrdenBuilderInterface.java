@@ -1,5 +1,8 @@
 package Controlador;
 
+import Modelo.Cliente;
+import Modelo.Producto;
+
 public interface OrdenBuilderInterface {
     OrdenBuilderInterface addProducto(Producto producto);
     OrdenBuilderInterface setCliente(Cliente cliente);

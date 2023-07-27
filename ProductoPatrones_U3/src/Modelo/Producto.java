@@ -9,6 +9,17 @@ public class Producto {
     public int stock;
     public double precio;
 
+    public Producto Producto(int id, String nombre, String categoria1, String categoria2, int stock, double precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.categoria1 = categoria1;
+        this.categoria2 = categoria2;
+        this.stock = stock;
+        this.precio = precio;
+        return this;
+        
+    }
+    
     public void setId(int id) {
         this.id = id;
     }

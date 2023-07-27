@@ -1,7 +1,12 @@
 
 package Modelo;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 
@@ -52,7 +57,7 @@ public class ClienteDAO {
     }
 
     private List<Cliente> cargarClientes() {
-        List<Cliente> clientes = new ArrayList<>();
+        List<Cliente> clientes = new ArrayList<>(); 
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(NOMBRE_ARCHIVO))) {
             while (true) {

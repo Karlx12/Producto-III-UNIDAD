@@ -9,6 +9,16 @@ public class Empleado {
     public String apellidos;
     public int telefono;
 
+    public Empleado Empleado(int id, String usuario, String contraseña, String nombres, String apellidos, int telefono) {
+        this.id = id;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+        return this;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

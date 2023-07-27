@@ -1,10 +1,15 @@
 package Controlador;
 
 // Patrón estructural - Facade
+
+import Modelo.Producto;
+
 public class OrdenFacade {
     private ControlInventario controlInventario;
     private PagoServicio pagoServicio;
     private ServicioEnvio servicioEnvio;
+    
+
 
     public OrdenFacade() {
         this.controlInventario = new ControlInventario();
@@ -13,6 +18,7 @@ public class OrdenFacade {
     }
 
     public void realizarOrden(Orden orden) {
+
         // Verificar disponibilidad de productos y reservar en el inventario
         for (Producto producto : orden.getProductos()) {
             if (controlInventario.checkDisponibilidad(producto)) {
