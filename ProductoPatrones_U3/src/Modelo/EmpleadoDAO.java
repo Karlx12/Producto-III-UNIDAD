@@ -10,8 +10,8 @@ import java.io.ObjectOutputStream;
 
 
 public class EmpleadoDAO {
-    
-    private static final String NOMBRE_ARCHIVO = "DATABASE/empleados.dat";
+    String ruta=System.getProperty("user.dir");
+    private final String NOMBRE_ARCHIVO = ruta+"/empleados.dat";
 
     public void empleadoCreate(Empleado empleado) {
         

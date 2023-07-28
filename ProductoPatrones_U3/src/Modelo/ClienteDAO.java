@@ -11,8 +11,8 @@ import java.util.*;
 
 
 public class ClienteDAO {
-    
-    private static final String NOMBRE_ARCHIVO = "DATABASE/clientes.dat";
+    String ruta=System.getProperty("user.dir");
+    private final String NOMBRE_ARCHIVO = ruta+"/clientes.dat";
 
     public void clienteCreate(Cliente cliente) {
         List<Cliente> clientes = cargarClientes();
