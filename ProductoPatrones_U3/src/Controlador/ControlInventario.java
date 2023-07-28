@@ -4,12 +4,9 @@ import Modelo.Producto;
 
 public class ControlInventario {
 
-    int cantidad_pedida;
-    public ControlInventario(int cantidad_pedida) {
-        this.cantidad_pedida = cantidad_pedida;
-    }
 
-    public boolean checkDisponibilidad(Producto producto) {
+
+    public boolean checkDisponibilidad(Producto producto,int cantidad_pedida) {
         // Lógica para verificar la disponibilidad del producto en el inventario
         if (producto == null) {
             throw new IllegalArgumentException("Producto inválido");
@@ -18,7 +15,7 @@ public class ControlInventario {
         return stockDisponible >= cantidad_pedida;
     }
  
-    public void reservarProducto(Producto producto) {
+    public void reservarProducto(Producto producto,int cantidad_pedida) {
         if (producto == null) {
             throw new IllegalArgumentException("Producto inválido");
         }
