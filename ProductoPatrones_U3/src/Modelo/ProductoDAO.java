@@ -10,8 +10,8 @@ import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class ProductoDAO {
-    
-    private static final String NOMBRE_ARCHIVO = "DATABASE/productos.dat";
+    String ruta=System.getProperty("user.dir");
+    private final String NOMBRE_ARCHIVO = ruta+"/productos.dat";
 
     public void productoCreate(Producto producto) {
         List<Producto> productos = cargarProductos();
