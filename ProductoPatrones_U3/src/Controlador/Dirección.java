@@ -5,13 +5,13 @@ public class Dirección {
     private String calle;
     private String ciudad;
     private String país;
-    private TipoCompra tipoCompra;
+ 
 
-    public Dirección(String calle, String ciudad, String país, TipoCompra tipoCompra) {
+    public Dirección(String calle, String ciudad, String país) {
         this.calle = calle;
         this.ciudad = ciudad;
         this.país = país;
-        this.tipoCompra = tipoCompra;
+
     }
 
     // Getter para la calle
@@ -44,13 +44,5 @@ public class Dirección {
         this.país = país;
     }
 
-    // Getter para el tipo de compra
-    public TipoCompra getTipoCompra() {
-        return tipoCompra;
-    }
 
-    // Setter para el tipo de compra
-    public void setTipoCompra(TipoCompra tipoCompra) {
-        this.tipoCompra = tipoCompra;
-    }
 }

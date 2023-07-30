@@ -6,7 +6,8 @@ public class ControlInventario {
 
 
 
-    public boolean checkDisponibilidad(Producto producto,int cantidad_pedida) {
+    public boolean checkDisponibilidad(Producto producto) {
+        int cantidad_pedida=producto.getPedido();
         // Lógica para verificar la disponibilidad del producto en el inventario
         if (producto == null) {
             throw new IllegalArgumentException("Producto inválido");
@@ -15,7 +16,8 @@ public class ControlInventario {
         return stockDisponible >= cantidad_pedida;
     }
  
-    public void reservarProducto(Producto producto,int cantidad_pedida) {
+    public void reservarProducto(Producto producto) {
+        int cantidad_pedida=producto.getPedido();
         if (producto == null) {
             throw new IllegalArgumentException("Producto inválido");
         }

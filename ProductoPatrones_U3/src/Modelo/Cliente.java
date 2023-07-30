@@ -1,6 +1,8 @@
 
 package Modelo;
 
+import Controlador.Dirección;
+
 public class Cliente {
     public int id;
     public String usuario;
@@ -8,10 +10,10 @@ public class Cliente {
     public String nombres;
     public String apellidos;
     public String email;
-    public String direccion;
+    public Dirección direccion;
     public int telefono;
 
-    public Cliente Cliente(int id, String usuario, String contraseña, String nombres, String apellidos, String email, String direccion, int telefono) {
+    public Cliente Cliente(int id, String usuario, String contraseña, String nombres, String apellidos, String email, Dirección direccion, int telefono) {
         this.id = id;
         this.usuario = usuario;
         this.contraseña = contraseña;
@@ -47,10 +49,6 @@ public class Cliente {
         this.email = email;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
@@ -79,12 +77,18 @@ public class Cliente {
         return email;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
+
 
     public int getTelefono() {
         return telefono;
+    }
+
+    public Dirección getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Dirección direccion) {
+        this.direccion = direccion;
     }
     
     

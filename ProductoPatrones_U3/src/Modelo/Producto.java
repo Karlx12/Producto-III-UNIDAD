@@ -5,15 +5,15 @@ public class Producto {
     public int id;
     public String nombre;
     public String categoria1;
-    public String categoria2;
+    public int Pedido;
     public int stock;
     public double precio;
 
-    public Producto Producto(int id, String nombre, String categoria1, String categoria2, int stock, double precio) {
+    public Producto Producto(int id, String nombre, String categoria1, java.lang.Integer Pedido, int stock, double precio) {
         this.id = id;
         this.nombre = nombre;
         this.categoria1 = categoria1;
-        this.categoria2 = categoria2;
+        this.Pedido = Pedido;
         this.stock = stock;
         this.precio = precio;
         return this;
@@ -32,8 +32,8 @@ public class Producto {
         this.categoria1 = categoria1;
     }
 
-    public void setCategoria2(String categoria2) {
-        this.categoria2 = categoria2;
+    public void setPedido(int Pedido) {
+        this.Pedido = Pedido;
     }
 
     public void setStock(int stock) {
@@ -56,8 +56,8 @@ public class Producto {
         return categoria1;
     }
 
-    public String getCategoria2() {
-        return categoria2;
+    public int getPedido() {
+        return Pedido;
     }
 
     public int getStock() {

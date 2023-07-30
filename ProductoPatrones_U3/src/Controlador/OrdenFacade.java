@@ -9,8 +9,8 @@ public class OrdenFacade {
     private PagoServicio pagoServicio;
     private ServicioEnvio servicioEnvio;
 
-    public OrdenFacade(int cantidad_pedida) {
-        this.controlInventario = new ControlInventario(cantidad_pedida);
+    public OrdenFacade() {
+        this.controlInventario = new ControlInventario();
         this.pagoServicio = new PagoServicio();
         this.servicioEnvio = new ServicioEnvio();
     }
@@ -25,11 +25,12 @@ public class OrdenFacade {
             } else {
                 System.out.println("Producto agotado: " + producto.getNombre());
                 ordenProcesada = false; // Si hay algún producto agotado, la orden no se puede procesar completamente
+                break;
             }
         }
-
+        
         // Procesar el pago
-        if (pagoServicio.procesoPago(orden.getCliente(), orden.getCantidadTotal())) {
+        if (pagoServicio.procesoPago(orden.getCliente(), orden.getCantidadTotal()) && ordenProcesada) {
             // Enviar el pedido
             servicioEnvio.shipOrden(orden);
             System.out.println("Pedido realizado con éxito.");

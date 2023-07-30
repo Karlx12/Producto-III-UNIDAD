@@ -1,7 +1,8 @@
 package Controlador;
 
 public class ServicioEnvio {
-    public void shipOrden(Orden orden) {
-        // Lógica para enviar el pedido al cliente
+    public String shipOrden(Orden orden) {
+        String a="La orden llegara en 15 dias";
+        return a;
     }
 }
