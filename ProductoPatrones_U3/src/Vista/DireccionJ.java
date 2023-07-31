@@ -6,17 +6,17 @@
 package Vista;
 
 import javax.swing.JOptionPane;
-
+import Controlador.Dirección;
 /**
  *
  * @author Usuario
  */
-public class Direccion extends javax.swing.JFrame {
+public class DireccionJ extends javax.swing.JFrame {
 
     /**
      * Creates new form Direccion
      */
-    public Direccion() {
+    public DireccionJ() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -59,6 +59,12 @@ public class Direccion extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Calle");
+
+        txtCalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCalleActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ciudad");
 
@@ -148,7 +154,16 @@ public class Direccion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public Dirección getDireccion() {
+        String calle = txtCalle.getText();
+        String ciudad = txtCiudad.getText();
+        // Obtener otros datos ingresados por el usuario
+        Dirección direccion = new Dirección(calle, ciudad,"Perú");
 
+        // Inicializar el objeto DireccionJ con los datos ingresados
+
+        return direccion;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (this.txtCalle.getText().equals("")
                 || String.valueOf(this.txtCiudad.getText()).equals("")
@@ -157,13 +172,14 @@ public class Direccion extends javax.swing.JFrame {
         } else {
             
             
-            registrarse RegistrateFrame = new registrarse();
-            RegistrateFrame.setVisible(true);
-            RegistrateFrame.pack();
-            RegistrateFrame.setLocationRelativeTo(null);
-            this.dispose();
+
+            setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCalleActionPerformed
 
     /**
          * @param args the command line arguments
@@ -182,20 +198,21 @@ public class Direccion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Direccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DireccionJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Direccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DireccionJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Direccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DireccionJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Direccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DireccionJ.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Direccion().setVisible(true);
+                new DireccionJ().setVisible(true);
             }
         });
     }

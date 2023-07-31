@@ -1,7 +1,9 @@
 package Controlador;
 
+import java.io.Serializable;
 
-public class Dirección {
+
+public class Dirección implements Serializable{
     private String calle;
     private String ciudad;
     private String país;

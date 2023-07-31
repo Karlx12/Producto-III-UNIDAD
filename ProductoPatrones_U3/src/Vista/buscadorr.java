@@ -82,14 +82,14 @@ public class buscadorr extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Categoria", "Precio", "Pedido"
+                "Nombre", "Categoria", "Pedido", "Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -110,7 +110,7 @@ public class buscadorr extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        CBC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Camisa", "Shorts" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,7 +185,7 @@ public class buscadorr extends javax.swing.JFrame {
     private void BtComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtComprarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        new Compras(cliente).setVisible(true);
+        new Compras(cliente,jTable1).setVisible(true);
     }//GEN-LAST:event_BtComprarActionPerformed
 
     private void TfProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfProductoKeyPressed

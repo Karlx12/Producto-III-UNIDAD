@@ -4,11 +4,13 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author maxx1212
  */
-public class Camisa extends Producto {
+public class Camisa extends Producto implements Serializable{
 
     public Camisa(int id, String nombre, int Pedido, int stock, double precio) {
         super(id, nombre, Pedido, stock, precio);

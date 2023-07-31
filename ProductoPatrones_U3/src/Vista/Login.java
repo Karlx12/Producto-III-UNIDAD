@@ -8,19 +8,33 @@ import Modelo.Cliente;
 import Modelo.ClienteDAO;
 import Modelo.Empleado;
 import Modelo.EmpleadoDAO;
-import javax.swing.JFrame;
 
 /**
  *
  * @author Ayton
  */
 public class Login extends javax.swing.JFrame {
-
+    private registrarse registrarse;
+    private buscadorr buscador;
+    private Stock s;
+    private Cliente c;
+    private Empleado e;
     /**
      * Creates new form frame_login
      */
     public Login() {
         initComponents();
+        if (registrarse == null) {
+            registrarse = new registrarse();
+        }
+        if (buscador==null){
+            buscador= new buscadorr(c);
+        }
+        if (s==null){
+            s= new Stock();
+        }
+        
+        this.setLocationRelativeTo(null);
     }
 
 
@@ -153,18 +167,20 @@ public class Login extends javax.swing.JFrame {
 
     private void BtAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAccederActionPerformed
         // TODO add your handling code here:
-        Empleado e=new EmpleadoDAO().empleadoRead(TFUsuario.getText());
-        Cliente c=new ClienteDAO().clienteRead(TFUsuario.getText());
-        if (e.getUsuario().equals(TFUsuario.getText())){
-            setVisible(false);
-            JFrame Stock= new Stock();
-            Stock.setVisible(true);
-            
-        }else if(c.getUsuario().equals(TFUsuario.getText())){
-            setVisible(false);
-            JFrame buscadorr =new buscadorr(c);
-            buscadorr.setVisible(true);
-        }
+       e = new EmpleadoDAO().empleadoRead(TFUsuario.getText());
+       c = new ClienteDAO().clienteRead(TFUsuario.getText());
+
+       if (c != null && c.getUsuario().equals(TFUsuario.getText())) {
+           setVisible(false);
+           buscador.setVisible(true);
+       } else if (e != null && e.getUsuario().equals(TFUsuario.getText())) {
+           setVisible(false);
+           s.setVisible(true);
+       } else {
+           // El usuario no es ni cliente ni empleado, mostrar mensaje de error
+           javax.swing.JOptionPane.showMessageDialog(this, "El usuario no existe", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+       }
+
         
     }//GEN-LAST:event_BtAccederActionPerformed
 

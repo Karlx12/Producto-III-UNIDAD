@@ -2,8 +2,9 @@
 package Modelo;
 
 import Controlador.Dirección;
+import java.io.Serializable;
 
-public class Cliente {
+public class Cliente implements Serializable{
     public int id;
     public String usuario;
     public String contraseña;

@@ -4,12 +4,17 @@
  */
 package Vista;
 
+import Controlador.Recalc;
+import Modelo.Producto;
+import Modelo.ProductoDAO;
+import java.util.List;
+
 /**
  *
  * @author rodri
  */
 public class Stock extends javax.swing.JFrame {
-
+    private Recalc qa=new Recalc();
     /**
      * Creates new form ventana2
      */
@@ -42,7 +47,17 @@ public class Stock extends javax.swing.JFrame {
         jLabel1.setText("Categoría 1:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Camisa", "Shorts" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 280, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -98,7 +113,40 @@ public class Stock extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        List <Producto> prs = qa.extraerDatosDesdeTabla(jTable1);
+        qa.guardarNuevosProductos(prs);
+        jTable1.setModel(qa.Actualizar(jTable1));
+        jTable1.repaint();
+        List <Producto> pr=qa.filtrarTabla("", jComboBox1.getSelectedItem().toString());
+        for (Producto producto : prs) {
+            System.out.println("asda"+producto.toString()); 
+        }
+            
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        
+        List <Producto> pr=qa.filtrarTabla("", jComboBox1.getSelectedItem().toString());
+        for (Producto producto : pr) {
+            System.out.println(producto.toString()); 
+        }
+            
+        jTable1.setModel(qa.convertirProductosATabla(pr, jTable1));
+        jTable1.repaint();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+                List <Producto> pr=qa.filtrarTabla("", jComboBox1.getSelectedItem().toString());
+        for (Producto producto : pr) {
+            System.out.println(producto.toString()); 
+        }
+            
+        
+        jTable1.setModel(qa.convertirProductosATabla(pr, jTable1));
+        jTable1.repaint();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

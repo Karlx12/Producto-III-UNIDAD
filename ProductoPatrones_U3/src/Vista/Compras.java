@@ -4,7 +4,17 @@
  */
 package Vista;
 
+import Controlador.Dirección;
+import Controlador.Orden;
+import Controlador.OrdenBuilder;
+import Controlador.OrdenFacade;
+import Controlador.Recalc;
+import Modelo.Camisa;
 import Modelo.Cliente;
+import Modelo.Producto;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -12,14 +22,17 @@ import Modelo.Cliente;
  */
 public class Compras extends javax.swing.JFrame {
     private Cliente cliente;
+    
     /**
      * Creates new form venatana1
      * @param c
+     * @param t
      */
-    public Compras(Cliente c) {
+    public Compras(Cliente c,JTable t) {
         this.cliente=c;
         
         initComponents();
+        jTable1.setModel((TableModel) t);
 
         
     }
@@ -95,6 +108,11 @@ public class Compras extends javax.swing.JFrame {
         }
 
         jButton1.setText("Comprar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         LbNombresApellidos.setText(cliente.getUsuario());
 
@@ -215,6 +233,22 @@ public class Compras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        Orden orden = new OrdenBuilder()
+                .setProductos(new Recalc().extraerDatosDesdeTabla(jTable1))
+                .setCliente(cliente)
+                .setDirecciónEnvio(cliente.getDireccion())
+                .setFacturaciónEnvio(cliente.getDireccion())
+                .build();
+
+
+        // Uso del patrón estructural - Facade para realizar el pedido con recojo en tienda
+        OrdenFacade ordenFacade = new OrdenFacade();
+        ordenFacade.realizarOrden(orden);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -22,7 +22,7 @@ public class Recalc {
     private ProductoDAO productoDAO = new ProductoDAO();
     public Recalc() {
         
-        datos = new ArrayList<>();
+        datos = productoDAO.cargarProductos();
         
     }
     public DefaultTableModel Actualizar(JTable tabla) {
@@ -79,9 +79,48 @@ public class Recalc {
 
         return resultados;
     }
-    public void extraerTabla(JTable tabla) {
+    public DefaultTableModel convertirProductosATabla(List<Producto> productos, JTable tabla) {
+    DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+    int numColumnasTabla = model.getColumnCount();
+
+    for (Producto producto : productos) {
+        Object[] fila = new Object[numColumnasTabla];
+
+        for (int col = 0; col < numColumnasTabla; col++) {
+            String columnaActual = model.getColumnName(col);
+            Object valorCelda = null;
+
+            switch (columnaActual) {
+                case "id":
+                    valorCelda = producto.getId();
+                    break;
+                case "Nombre":
+                    valorCelda = producto.getNombre();
+                    break;
+                case "Pedido":
+                    valorCelda = producto.getPedido();
+                    break;
+                case "Stock":
+                    valorCelda = producto.getStock();
+                    break;
+                case "Precio":
+                    valorCelda = producto.getPrecio();
+                    break;
+                default:
+                    // Ignorar columnas desconocidas o no utilizadas en Producto
+            }
+
+            fila[col] = valorCelda;
+        }
+
+        model.addRow(fila);
+  
+    }
+
+    return model;
+    }
+    public List<Producto> extraerDatosDesdeTabla(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-        List<Producto> productosExistentes = productoDAO.cargarProductos();
 
         int numColumnasTabla = model.getColumnCount();
         List<String> columnasTabla = new ArrayList<>();
@@ -89,6 +128,7 @@ public class Recalc {
             columnasTabla.add(model.getColumnName(i));
         }
 
+        List<Producto> nuevosProductos = new ArrayList<>();
         for (int fila = 0; fila < model.getRowCount(); fila++) {
             String categoria = null;
             int id = 0;
@@ -133,6 +173,16 @@ public class Recalc {
                 continue;
             }
 
+            nuevosProductos.add(producto);
+        }
+
+        return nuevosProductos;
+    }
+
+    public void guardarNuevosProductos(List<Producto> nuevosProductos) {
+        List<Producto> productosExistentes = productoDAO.cargarProductos();
+
+        for (Producto producto : nuevosProductos) {
             boolean productoExiste = false;
             for (Producto p : productosExistentes) {
                 if (p.getId() == producto.getId()) {
@@ -147,6 +197,7 @@ public class Recalc {
             }
         }
     }
+
 
 
 }

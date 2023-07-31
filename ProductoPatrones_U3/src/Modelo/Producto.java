@@ -1,6 +1,8 @@
 package Modelo;
 
-public abstract class Producto {
+import java.io.Serializable;
+
+public abstract class Producto implements Serializable{
 
     public int id;
     public String Nombre;
