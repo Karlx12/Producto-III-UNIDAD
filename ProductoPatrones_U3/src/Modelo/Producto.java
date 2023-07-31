@@ -9,14 +9,14 @@ public class Producto {
     public int stock;
     public double precio;
 
-    public Producto Producto(int id, String nombre, String categoria1, java.lang.Integer Pedido, int stock, double precio) {
+    public  Producto(int id, String nombre, String categoria1, int Pedido, int stock, double precio) {
         this.id = id;
         this.nombre = nombre;
         this.categoria1 = categoria1;
         this.Pedido = Pedido;
         this.stock = stock;
         this.precio = precio;
-        return this;
+        
         
     }
     
