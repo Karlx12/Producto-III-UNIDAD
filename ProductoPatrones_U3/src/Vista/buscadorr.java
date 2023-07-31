@@ -4,7 +4,10 @@
  */
 package Vista;
 
+import Controlador.Recalc;
 import Modelo.Cliente;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
 /**
@@ -13,6 +16,7 @@ import java.awt.event.KeyEvent;
  */
 public class buscadorr extends javax.swing.JFrame {
     private Cliente cliente;
+    private Recalc recalc= new Recalc();
     /**
      * Creates new form buscadorr
      * @param c
@@ -21,6 +25,7 @@ public class buscadorr extends javax.swing.JFrame {
         
         initComponents();
         this.cliente=c;
+        
         setLocationRelativeTo (null);
     }
 
@@ -113,6 +118,11 @@ public class buscadorr extends javax.swing.JFrame {
         }
 
         CBC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Camisa", "Shorts" }));
+        CBC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,9 +203,24 @@ public class buscadorr extends javax.swing.JFrame {
     private void TfProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfProductoKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            
+            recalc.Actualizar(jTable1);
+            jTable1.setVisible(false);
+            jTable1.setVisible(true);      
         }
     }//GEN-LAST:event_TfProductoKeyPressed
+
+    private void CBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBCActionPerformed
+    class ItemChangeListener implements ItemListener{
+    @Override
+    public void itemStateChanged(ItemEvent event) {
+       if (event.getStateChange() == ItemEvent.SELECTED) {
+          Object item = event.getItem();
+          // do something with object
+       }
+    }       
+
 
     /**
      * @param args the command line arguments

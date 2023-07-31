@@ -21,9 +21,10 @@ public class Recalc {
     private List<Producto> datos; 
     private ProductoDAO productoDAO = new ProductoDAO();
     public Recalc() {
-        
-        datos = productoDAO.cargarProductos();
-        
+        this.datos = productoDAO.cargarProductos();
+    }
+    public void recalcular(){
+        this.datos=productoDAO.cargarProductos();
     }
     public DefaultTableModel Actualizar(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();

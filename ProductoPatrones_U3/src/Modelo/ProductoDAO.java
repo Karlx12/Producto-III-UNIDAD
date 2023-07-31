@@ -1,6 +1,8 @@
 package Modelo;
 
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -43,11 +45,11 @@ public class ProductoDAO {
         guardarProductos(productos);
     }
 
-    public Producto productoRead(int id) {
+    public Producto productoRead(String nombre) {
         List<Producto> productos = cargarProductos();
 
         for (Producto producto : productos) {
-            if (producto.getId() == id) {
+            if (producto.getNombre().equals(nombre)) {
                 return producto;
             }
         }
@@ -80,5 +82,7 @@ public class ProductoDAO {
             
         }
     }
+
+
     
 }

@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class Stock extends javax.swing.JFrame {
     private Recalc qa=new Recalc();
+    private ProductoDAO ProductoDAO= new ProductoDAO();
     /**
      * Creates new form ventana2
      */
@@ -114,39 +115,29 @@ public class Stock extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        List <Producto> prs = qa.extraerDatosDesdeTabla(jTable1);
+        List<Producto> prs = qa.extraerDatosDesdeTabla(jTable1);
         qa.guardarNuevosProductos(prs);
-        jTable1.setModel(qa.Actualizar(jTable1));
-        jTable1.repaint();
-        List <Producto> pr=qa.filtrarTabla("", jComboBox1.getSelectedItem().toString());
-        for (Producto producto : prs) {
-            System.out.println("asda"+producto.toString()); 
-        }
+        jTable1.setModel(qa.convertirProductosATabla(qa.filtrarTabla("", jComboBox1.getSelectedItem().toString()), jTable1));
+        jTable1.setVisible(false);
+        jTable1.setVisible(true);
+
             
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
         
-        List <Producto> pr=qa.filtrarTabla("", jComboBox1.getSelectedItem().toString());
-        for (Producto producto : pr) {
-            System.out.println(producto.toString()); 
-        }
-            
-        jTable1.setModel(qa.convertirProductosATabla(pr, jTable1));
-        jTable1.repaint();
+        jTable1.setModel(qa.convertirProductosATabla(qa.filtrarTabla("", jComboBox1.getSelectedItem().toString()), jTable1));
+        jTable1.setVisible(false);
+        jTable1.setVisible(true);
+        
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-                List <Producto> pr=qa.filtrarTabla("", jComboBox1.getSelectedItem().toString());
-        for (Producto producto : pr) {
-            System.out.println(producto.toString()); 
-        }
-            
-        
-        jTable1.setModel(qa.convertirProductosATabla(pr, jTable1));
-        jTable1.repaint();
+        jTable1.setModel(qa.convertirProductosATabla(qa.filtrarTabla("", jComboBox1.getSelectedItem().toString()), jTable1));
+        jTable1.setVisible(false);
+        jTable1.setVisible(true);        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
