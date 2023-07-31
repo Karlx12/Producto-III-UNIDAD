@@ -27,9 +27,7 @@ public class Login extends javax.swing.JFrame {
         if (registrarse == null) {
             registrarse = new registrarse();
         }
-        if (buscador==null){
-            buscador= new buscadorr(c);
-        }
+        
         if (s==null){
             s= new Stock();
         }
@@ -172,9 +170,15 @@ public class Login extends javax.swing.JFrame {
 
        if (c != null && c.getUsuario().equals(TFUsuario.getText())) {
            setVisible(false);
+           if (buscador==null){
+            buscador= new buscadorr(c);
+           }
            buscador.setVisible(true);
        } else if (e != null && e.getUsuario().equals(TFUsuario.getText())) {
            setVisible(false);
+           if (s==null){
+            s= new Stock();
+           }
            s.setVisible(true);
        } else {
            // El usuario no es ni cliente ni empleado, mostrar mensaje de error

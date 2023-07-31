@@ -20,6 +20,7 @@ public class Stock extends javax.swing.JFrame {
      */
     public Stock() {
         initComponents();
+        setLocationRelativeTo (null);
     }
 
     /**

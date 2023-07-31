@@ -18,8 +18,10 @@ public class buscadorr extends javax.swing.JFrame {
      * @param c
      */
     public buscadorr(Cliente c) {
-        this.cliente=c;
+        
         initComponents();
+        this.cliente=c;
+        setLocationRelativeTo (null);
     }
 
     /**
