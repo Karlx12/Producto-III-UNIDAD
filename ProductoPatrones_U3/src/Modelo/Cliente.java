@@ -13,7 +13,7 @@ public class Cliente {
     public Dirección direccion;
     public int telefono;
 
-    public Cliente Cliente(int id, String usuario, String contraseña, String nombres, String apellidos, String email, Dirección direccion, int telefono) {
+    public Cliente(int id, String usuario, String contraseña, String nombres, String apellidos, String email, Dirección direccion, int telefono) {
         this.id = id;
         this.usuario = usuario;
         this.contraseña = contraseña;
@@ -22,7 +22,7 @@ public class Cliente {
         this.email = email;
         this.direccion = direccion;
         this.telefono = telefono;
-        return this;
+
     }
 
     public void setId(int id) {
