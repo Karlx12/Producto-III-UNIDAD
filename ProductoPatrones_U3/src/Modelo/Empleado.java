@@ -1,7 +1,9 @@
 
 package Modelo;
 
-public class Empleado {
+import java.io.Serializable;
+
+public class Empleado implements Serializable{
     public int id;
     public String usuario;
     public String contraseña;
@@ -9,14 +11,14 @@ public class Empleado {
     public String apellidos;
     public int telefono;
 
-    public Empleado Empleado(int id, String usuario, String contraseña, String nombres, String apellidos, int telefono) {
+    public Empleado(int id, String usuario, String contraseña, String nombres, String apellidos, int telefono) {
         this.id = id;
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.telefono = telefono;
-        return this;
+
     }
 
     public void setId(int id) {

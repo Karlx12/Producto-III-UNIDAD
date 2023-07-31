@@ -1,12 +1,17 @@
 package Controlador;
 
+import Modelo.Empleado;
+import Modelo.EmpleadoDAO;
 import Vista.Login;
-import javax.swing.JFrame;
+
 
 public class Main {
 
     public static void main(String[] args) {
-        JFrame Login= new Login();
-        Login.setVisible(true);
+        
+        new Login().setVisible(true);
+        EmpleadoDAO em=new EmpleadoDAO();
+        em.empleadoCreate(new Empleado(1,"max","max","max","max",5121));
+        
     }
 }
