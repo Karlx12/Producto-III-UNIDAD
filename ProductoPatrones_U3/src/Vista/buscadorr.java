@@ -4,8 +4,13 @@
  */
 package Vista;
 
+import Controlador.Recalc;
 import Modelo.Cliente;
+import Modelo.Producto;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 /**
  *
@@ -13,6 +18,7 @@ import java.awt.event.KeyEvent;
  */
 public class buscadorr extends javax.swing.JFrame {
     private Cliente cliente;
+    private Recalc recalc= new Recalc();
     /**
      * Creates new form buscadorr
      * @param c
@@ -20,8 +26,9 @@ public class buscadorr extends javax.swing.JFrame {
     public buscadorr(Cliente c) {
         
         initComponents();
-        this.cliente=c;
-        setLocationRelativeTo (null);
+        this.cliente = c;
+        setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -113,6 +120,11 @@ public class buscadorr extends javax.swing.JFrame {
         }
 
         CBC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Camisa", "Shorts" }));
+        CBC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -192,10 +204,25 @@ public class buscadorr extends javax.swing.JFrame {
 
     private void TfProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfProductoKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            recalc.recalcular();
+            actualizarTabla();
         }
     }//GEN-LAST:event_TfProductoKeyPressed
+
+    private void CBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCActionPerformed
+        // TODO add your handling code here:
+        String filtroCategoria = CBC.getSelectedItem().toString();
+        List<Producto> productosFiltrados = recalc.filtrarTabla("", filtroCategoria);
+        recalc.actualizarTabla(productosFiltrados);
+        actualizarTabla();
+    }//GEN-LAST:event_CBCActionPerformed
+    private void actualizarTabla() {
+        jTable1.setModel(recalc.getModel());
+        jTable1.setVisible(false);
+        jTable1.setVisible(true);
+    }
+
 
     /**
      * @param args the command line arguments
