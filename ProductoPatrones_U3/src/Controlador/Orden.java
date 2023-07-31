@@ -11,7 +11,7 @@ public class Orden  {
     private Cliente cliente;
     private Dirección direcciónEnvio;
     private Dirección facturaciónEnvio;
-    private TipoCompra tipoCompra;
+
 
     private Orden() {
         this.productos = new ArrayList<>();
@@ -37,23 +37,15 @@ public class Orden  {
         return total;
     }
     
-    public TipoCompra getTipoCompra() {
-        return this.tipoCompra;
-    }
 
-    
-//    public enum TipoCompra {
-//        RECOJO_TIENDA,
-//        ENVIO_DOMICILIO
-//    }
-    
+
     public static class OrdenBuilder  implements OrdenBuilderInterface{
 
         private List<Producto> productos;
         private Cliente cliente;
         private Dirección direcciónEnvio;
         private Dirección facturaciónEnvio;
-//        private TipoCompra tipoCompra;
+
 
         public OrdenBuilder() {
             this.productos = new ArrayList<>();

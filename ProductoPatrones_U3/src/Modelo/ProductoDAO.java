@@ -13,7 +13,7 @@ public class ProductoDAO {
     String ruta=System.getProperty("user.dir");
     private final String NOMBRE_ARCHIVO = ruta+"/productos.dat";
 
-    public void productoCreate(Producto producto) {
+    public void CreateProducto(Producto producto) {
         List<Producto> productos = cargarProductos();
 
         productos.add(producto);
@@ -21,7 +21,7 @@ public class ProductoDAO {
         guardarProductos(productos);
     }
 
-    public void productoUpdate(Producto producto) {
+    public void UpdateProducto(Producto producto) {
         List<Producto> productos = cargarProductos();
 
         for (int i = 0; i < productos.size(); i++) {

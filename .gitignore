@@ -23,3 +23,8 @@
 hs_err_pid*
 replay_pid*
 /ProductoPatrones_U3/build/
+ProductoPatrones_U3/nbproject/private/private.properties
+ProductoPatrones_U3/nbproject/private/private.xml
+ProductoPatrones_U3/nbproject/private/private.properties
+*.xml
+*.properties

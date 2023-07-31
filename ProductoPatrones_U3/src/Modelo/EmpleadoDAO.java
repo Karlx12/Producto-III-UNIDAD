@@ -27,7 +27,7 @@ public class EmpleadoDAO {
 
         for (int i = 0; i < empleados.size(); i++) {
             Empleado e = empleados.get(i);
-            if (e.getId() == empleado.getId()) {
+            if (e.getUsuario().equals(empleado.getUsuario())) {
                 empleados.set(i, empleado);
                 break;
             }
@@ -39,16 +39,16 @@ public class EmpleadoDAO {
     public void empleadoDelete(Empleado empleado) {
         List<Empleado> empleados = cargarEmpleados();
 
-        empleados.removeIf(e -> e.getId() == empleado.getId());
+        empleados.removeIf(e -> e.getUsuario().equals(empleado.getUsuario()));
 
         guardarEmpleados(empleados);
     }
 
-    public Empleado empleadoRead(int id) {
+    public Empleado empleadoRead(String usuario) {
         List<Empleado> empleados = cargarEmpleados();
 
         for (Empleado empleado : empleados) {
-            if (empleado.getId() == id) {
+            if (empleado.getUsuario().equals(usuario)) {
                 return empleado;
             }
         }
