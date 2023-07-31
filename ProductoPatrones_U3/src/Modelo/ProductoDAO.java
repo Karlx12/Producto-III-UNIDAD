@@ -55,7 +55,7 @@ public class ProductoDAO {
         return null;
     }
 
-    private List<Producto> cargarProductos() {
+    public List<Producto> cargarProductos() {
         List<Producto> productos = new ArrayList<>();
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(NOMBRE_ARCHIVO))) {

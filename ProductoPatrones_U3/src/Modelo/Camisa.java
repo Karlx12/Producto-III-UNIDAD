@@ -26,12 +26,12 @@ public class Camisa extends Producto {
 
     @Override
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     @Override
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.Nombre = nombre;
     }
 
     @Override
@@ -46,19 +46,19 @@ public class Camisa extends Producto {
 
     @Override
     public int getStock() {
-        return stock;
+        return Stock;
     }
     @Override
     public void setStock(int stock) {
-        this.stock = stock;
+        this.Stock = stock;
     }
     @Override
     public double getPrecio() {
-        return precio;
+        return Precio;
     }
     @Override
     public void setPrecio(double precio) {
-        this.precio = precio;
+        this.Precio = precio;
     }
     
 }
