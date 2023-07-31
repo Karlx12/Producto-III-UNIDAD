@@ -27,7 +27,7 @@ public class ClienteDAO {
 
         for (int i = 0; i < clientes.size(); i++) {
             Cliente c = clientes.get(i);
-            if (c.getId() == cliente.getId()) {
+            if (c.getUsuario().equals(cliente.getUsuario())) {
                 clientes.set(i, cliente);
                 break;
             }
@@ -39,16 +39,16 @@ public class ClienteDAO {
     public void clienteDelete(Cliente cliente) {
         List<Cliente> clientes = cargarClientes();
 
-        clientes.removeIf(c -> c.getId() == cliente.getId());
+        clientes.removeIf(c -> c.getUsuario().equals(cliente.getUsuario()));
 
         guardarClientes(clientes);
     }
 
-    public Cliente clienteRead(int id) {
+    public Cliente clienteRead(String nombre) {
         List<Cliente> clientes = cargarClientes();
 
         for (Cliente cliente : clientes) {
-            if (cliente.getId() == id) {
+            if (cliente.getUsuario().equals(nombre)) {
                 return cliente;
             }
         }
