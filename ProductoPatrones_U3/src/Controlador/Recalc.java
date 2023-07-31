@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
 import Modelo.Camisa;
@@ -13,113 +9,67 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author maxx1212
- */
 public class Recalc {
-    private List<Producto> datos; 
+    private List<Producto> datos;
     private ProductoDAO productoDAO = new ProductoDAO();
+    private DefaultTableModel model;
+
     public Recalc() {
-        this.datos = productoDAO.cargarProductos();
+        datos = productoDAO.cargarProductos();
     }
-    public void recalcular(){
-        this.datos=productoDAO.cargarProductos();
+
+    public void recalcular() {
+        datos = productoDAO.cargarProductos();
+        // Limpiar el modelo de la tabla
+        model.setRowCount(0);
     }
-    public DefaultTableModel Actualizar(JTable tabla) {
-        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
 
+    public DefaultTableModel getModel() {
+        if (model == null) {
+            model = crearModeloTabla();
+        }
+        return model;
+    }
 
-        int numColumnasTabla = model.getColumnCount();
+    private DefaultTableModel crearModeloTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id");
+        model.addColumn("Nombre");
+        model.addColumn("Pedido");
+        model.addColumn("Stock");
+        model.addColumn("Precio");
+        return model;
+    }
 
+    public void actualizarTabla() {
+        model = getModel();
 
-
-        for (Producto registro : datos) {
-            Object[] fila = new Object[numColumnasTabla];
-            for (int i = 0; i < numColumnasTabla; i++) {
-                String columnaActual = model.getColumnName(i);
-                switch (columnaActual) {
-                    case "id":
-                        fila[i] = registro.id;
-                        break;
-                    case "nombre":
-                        fila[i] = registro.Nombre;
-                        break;
-                    case "Pedido":
-                        fila[i] = registro.Pedido;
-                        break;
-                    case "stock":
-                        fila[i] = registro.Stock;
-                        break;
-                    case "precio":
-                        fila[i] = registro.Precio;
-                        break;
-                    default:
-                        fila[i] = null; 
-                }
-            }
+        for (Producto producto : datos) {
+            Object[] fila = new Object[5];
+            fila[0] = producto.getId();
+            fila[1] = producto.getNombre();
+            fila[2] = producto.getPedido();
+            fila[3] = producto.getStock();
+            fila[4] = producto.getPrecio();
             model.addRow(fila);
         }
-
-        return model; 
     }
-
-
 
     public List<Producto> filtrarTabla(String filtroNombre, String filtroCategoria) {
         List<Producto> resultados = new ArrayList<>();
 
-        for (Producto registro : datos) {
-            boolean cumpleFiltroNombre = filtroNombre.isEmpty() || registro.getNombre().contains(filtroNombre);
-            boolean cumpleFiltroCategoria = filtroCategoria.isEmpty() || registro.getClass().getName().equals(filtroCategoria);
+        for (Producto producto : datos) {
+            boolean cumpleFiltroNombre = filtroNombre.isEmpty() || producto.getNombre().contains(filtroNombre);
+            boolean cumpleFiltroCategoria = filtroCategoria.isEmpty() || producto.getClass().getSimpleName().equals(filtroCategoria);
 
             if (cumpleFiltroNombre && cumpleFiltroCategoria) {
-                resultados.add(registro);
+                resultados.add(producto);
             }
         }
 
         return resultados;
     }
-    public DefaultTableModel convertirProductosATabla(List<Producto> productos, JTable tabla) {
-    DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-    int numColumnasTabla = model.getColumnCount();
 
-    for (Producto producto : productos) {
-        Object[] fila = new Object[numColumnasTabla];
-
-        for (int col = 0; col < numColumnasTabla; col++) {
-            String columnaActual = model.getColumnName(col);
-            Object valorCelda = null;
-
-            switch (columnaActual) {
-                case "id":
-                    valorCelda = producto.getId();
-                    break;
-                case "Nombre":
-                    valorCelda = producto.getNombre();
-                    break;
-                case "Pedido":
-                    valorCelda = producto.getPedido();
-                    break;
-                case "Stock":
-                    valorCelda = producto.getStock();
-                    break;
-                case "Precio":
-                    valorCelda = producto.getPrecio();
-                    break;
-                default:
-                    // Ignorar columnas desconocidas o no utilizadas en Producto
-            }
-
-            fila[col] = valorCelda;
-        }
-
-        model.addRow(fila);
-  
-    }
-
-    return model;
-    }
     public List<Producto> extraerDatosDesdeTabla(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
 
@@ -142,23 +92,20 @@ public class Recalc {
                 String columnaActual = columnasTabla.get(col);
                 Object valorCelda = model.getValueAt(fila, col);
                 switch (columnaActual) {
-                    case "id":
+                    case "Id":
                         id = (int) valorCelda;
                         break;
-                    case "nombre":
+                    case "Nombre":
                         nombre = (String) valorCelda;
                         break;
                     case "Pedido":
                         pedido = (int) valorCelda;
                         break;
-                    case "stock":
+                    case "Stock":
                         stock = (int) valorCelda;
                         break;
-                    case "precio":
+                    case "Precio":
                         precio = (double) valorCelda;
-                        break;
-                    case "categoria":
-                        categoria = (String) valorCelda;
                         break;
                     default:
                         // Ignorar columnas desconocidas o no utilizadas en Producto
@@ -198,7 +145,4 @@ public class Recalc {
             }
         }
     }
-
-
-
 }

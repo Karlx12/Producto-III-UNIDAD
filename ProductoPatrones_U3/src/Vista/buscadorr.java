@@ -24,9 +24,9 @@ public class buscadorr extends javax.swing.JFrame {
     public buscadorr(Cliente c) {
         
         initComponents();
-        this.cliente=c;
-        
-        setLocationRelativeTo (null);
+        this.cliente = c;
+        setLocationRelativeTo(null);
+        actualizarTabla();
     }
 
     /**
@@ -202,25 +202,23 @@ public class buscadorr extends javax.swing.JFrame {
 
     private void TfProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfProductoKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            recalc.Actualizar(jTable1);
-            jTable1.setVisible(false);
-            jTable1.setVisible(true);      
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            recalc.recalcular();
+            actualizarTabla();
         }
     }//GEN-LAST:event_TfProductoKeyPressed
 
     private void CBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCActionPerformed
         // TODO add your handling code here:
+        recalc.recalcular();
+        actualizarTabla();
     }//GEN-LAST:event_CBCActionPerformed
-    class ItemChangeListener implements ItemListener{
-    @Override
-    public void itemStateChanged(ItemEvent event) {
-       if (event.getStateChange() == ItemEvent.SELECTED) {
-          Object item = event.getItem();
-          // do something with object
-       }
-    }       
-
+    private void actualizarTabla() {
+        recalc.actualizarTabla();
+        jTable1.setModel(recalc.getModel());
+        jTable1.setVisible(false);
+        jTable1.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments

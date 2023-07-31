@@ -14,14 +14,15 @@ import java.util.List;
  * @author rodri
  */
 public class Stock extends javax.swing.JFrame {
-    private Recalc qa=new Recalc();
+    private Recalc recalc=new Recalc();
     private ProductoDAO ProductoDAO= new ProductoDAO();
     /**
      * Creates new form ventana2
      */
     public Stock() {
         initComponents();
-        setLocationRelativeTo (null);
+        setLocationRelativeTo(null);
+        actualizarTabla();
     }
 
     /**
@@ -115,11 +116,9 @@ public class Stock extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        List<Producto> prs = qa.extraerDatosDesdeTabla(jTable1);
-        qa.guardarNuevosProductos(prs);
-        jTable1.setModel(qa.convertirProductosATabla(qa.filtrarTabla("", jComboBox1.getSelectedItem().toString()), jTable1));
-        jTable1.setVisible(false);
-        jTable1.setVisible(true);
+        recalc.guardarNuevosProductos(recalc.extraerDatosDesdeTabla(jTable1));
+        recalc.recalcular();
+        actualizarTabla();
 
             
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -127,19 +126,18 @@ public class Stock extends javax.swing.JFrame {
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
         
-        jTable1.setModel(qa.convertirProductosATabla(qa.filtrarTabla("", jComboBox1.getSelectedItem().toString()), jTable1));
-        jTable1.setVisible(false);
-        jTable1.setVisible(true);
+        actualizarTabla();
         
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        jTable1.setModel(qa.convertirProductosATabla(qa.filtrarTabla("", jComboBox1.getSelectedItem().toString()), jTable1));
-        jTable1.setVisible(false);
-        jTable1.setVisible(true);        
+        actualizarTabla()   ;
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    private void actualizarTabla() {
+        jTable1.setModel(recalc.getModel());
+        recalc.actualizarTabla();
+    }
     /**
      * @param args the command line arguments
      */
