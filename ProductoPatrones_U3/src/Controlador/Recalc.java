@@ -16,6 +16,7 @@ public class Recalc {
 
     public Recalc() {
         datos = productoDAO.cargarProductos();
+        model = crearModeloTabla();
     }
 
     public void recalcular() {
@@ -41,10 +42,10 @@ public class Recalc {
         return model;
     }
 
-    public void actualizarTabla() {
-        model = getModel();
+    public void actualizarTabla(List<Producto> productos) {
+        model.setRowCount(0);
 
-        for (Producto producto : datos) {
+        for (Producto producto : productos) {
             Object[] fila = new Object[5];
             fila[0] = producto.getId();
             fila[1] = producto.getNombre();
@@ -55,12 +56,13 @@ public class Recalc {
         }
     }
 
+
     public List<Producto> filtrarTabla(String filtroNombre, String filtroCategoria) {
         List<Producto> resultados = new ArrayList<>();
 
         for (Producto producto : datos) {
             boolean cumpleFiltroNombre = filtroNombre.isEmpty() || producto.getNombre().contains(filtroNombre);
-            boolean cumpleFiltroCategoria = filtroCategoria.isEmpty() || producto.getClass().getSimpleName().equals(filtroCategoria);
+            boolean cumpleFiltroCategoria = filtroCategoria.isEmpty() || filtroCategoria.equals("Todos") || producto.getClass().getSimpleName().equals(filtroCategoria);
 
             if (cumpleFiltroNombre && cumpleFiltroCategoria) {
                 resultados.add(producto);
@@ -69,6 +71,7 @@ public class Recalc {
 
         return resultados;
     }
+
 
     public List<Producto> extraerDatosDesdeTabla(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
@@ -93,19 +96,35 @@ public class Recalc {
                 Object valorCelda = model.getValueAt(fila, col);
                 switch (columnaActual) {
                     case "Id":
-                        id = (int) valorCelda;
+                        if (valorCelda instanceof String) {
+                            id = Integer.parseInt((String) valorCelda);
+                        } else {
+                            id = (int) valorCelda;
+                        }
                         break;
                     case "Nombre":
-                        nombre = (String) valorCelda;
+                        nombre = ((String) valorCelda);
                         break;
                     case "Pedido":
-                        pedido = (int) valorCelda;
+                        if (valorCelda instanceof String) {
+                        pedido = Integer.parseInt((String) valorCelda);
+                        } else {
+                            pedido = (int) valorCelda;
+                        }
                         break;
                     case "Stock":
-                        stock = (int) valorCelda;
+                        if (valorCelda instanceof String) {
+                        stock = Integer.parseInt((String) valorCelda);
+                        } else {
+                            stock = (int) valorCelda;
+                        }
                         break;
                     case "Precio":
-                        precio = (double) valorCelda;
+                        if (valorCelda instanceof String) {
+                        precio = Double.parseDouble((String) valorCelda);
+                        } else {
+                            precio = (double) valorCelda;
+                        }
                         break;
                     default:
                         // Ignorar columnas desconocidas o no utilizadas en Producto
@@ -128,21 +147,41 @@ public class Recalc {
     }
 
     public void guardarNuevosProductos(List<Producto> nuevosProductos) {
-        List<Producto> productosExistentes = productoDAO.cargarProductos();
+    List<Producto> productosExistentes = productoDAO.cargarProductos();
 
-        for (Producto producto : nuevosProductos) {
-            boolean productoExiste = false;
-            for (Producto p : productosExistentes) {
-                if (p.getId() == producto.getId()) {
-                    productoExiste = true;
-                    break;
-                }
-            }
-
-            if (!productoExiste) {
-                productoDAO.CreateProducto(producto);
-                productosExistentes.add(producto);
+    // Eliminar productos que han sido borrados de la tabla
+    for (Producto productoExistente : productosExistentes) {
+        boolean productoBorrado = true;
+        for (Producto nuevoProducto : nuevosProductos) {
+            if (productoExistente.getId() == nuevoProducto.getId()) {
+                productoBorrado = false;
+                break;
             }
         }
+        if (productoBorrado) {
+            productoDAO.productoDelete(productoExistente);
+        }
     }
+
+    // Guardar o actualizar los productos existentes
+    for (Producto nuevoProducto : nuevosProductos) {
+        boolean productoExiste = false;
+        for (Producto productoExistente : productosExistentes) {
+            if (productoExistente.getId() == nuevoProducto.getId()) {
+                productoExiste = true;
+                break;
+            }
+        }
+
+        if (productoExiste) {
+            productoDAO.UpdateProducto(nuevoProducto);
+        } else {
+            productoDAO.CreateProducto(nuevoProducto);
+        }
+    }
+
+    // Actualizar la lista de datos con los nuevos productos
+    datos = productoDAO.cargarProductos();
+}
+
 }

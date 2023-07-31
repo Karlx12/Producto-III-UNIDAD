@@ -28,3 +28,4 @@ ProductoPatrones_U3/nbproject/private/private.xml
 ProductoPatrones_U3/nbproject/private/private.properties
 *.xml
 *.properties
+/ProductoPatrones_U3/dist/

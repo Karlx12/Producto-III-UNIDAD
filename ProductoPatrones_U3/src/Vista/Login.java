@@ -8,6 +8,7 @@ import Modelo.Cliente;
 import Modelo.ClienteDAO;
 import Modelo.Empleado;
 import Modelo.EmpleadoDAO;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -33,8 +34,13 @@ public class Login extends javax.swing.JFrame {
         }
         
         this.setLocationRelativeTo(null);
+        PasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PasswordFieldKeyPressed(evt);
+            }
+        });
     }
-
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -89,6 +95,16 @@ public class Login extends javax.swing.JFrame {
         PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 PasswordFieldFocusGained(evt);
+            }
+        });
+        PasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordFieldActionPerformed(evt);
+            }
+        });
+        PasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PasswordFieldKeyPressed(evt);
             }
         });
         jPanel1.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 149, 274, -1));
@@ -188,6 +204,17 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtAccederActionPerformed
 
+    private void PasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordFieldActionPerformed
+
+    private void PasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PasswordFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtAccederActionPerformed(null);
+        }
+    }//GEN-LAST:event_PasswordFieldKeyPressed
+    
     /**
      * @param args the command line arguments
      */

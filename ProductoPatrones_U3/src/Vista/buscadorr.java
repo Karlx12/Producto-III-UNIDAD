@@ -6,9 +6,11 @@ package Vista;
 
 import Controlador.Recalc;
 import Modelo.Cliente;
+import Modelo.Producto;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 /**
  *
@@ -26,7 +28,7 @@ public class buscadorr extends javax.swing.JFrame {
         initComponents();
         this.cliente = c;
         setLocationRelativeTo(null);
-        actualizarTabla();
+        
     }
 
     /**
@@ -210,15 +212,17 @@ public class buscadorr extends javax.swing.JFrame {
 
     private void CBCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCActionPerformed
         // TODO add your handling code here:
-        recalc.recalcular();
+        String filtroCategoria = CBC.getSelectedItem().toString();
+        List<Producto> productosFiltrados = recalc.filtrarTabla("", filtroCategoria);
+        recalc.actualizarTabla(productosFiltrados);
         actualizarTabla();
     }//GEN-LAST:event_CBCActionPerformed
     private void actualizarTabla() {
-        recalc.actualizarTabla();
         jTable1.setModel(recalc.getModel());
         jTable1.setVisible(false);
         jTable1.setVisible(true);
     }
+
 
     /**
      * @param args the command line arguments

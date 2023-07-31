@@ -65,10 +65,7 @@ public class Stock extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"12", null, null, null}
             },
             new String [] {
                 "Nombres", "Categoria", "Stock", "Precio"
@@ -135,8 +132,10 @@ public class Stock extends javax.swing.JFrame {
         actualizarTabla()   ;
     }//GEN-LAST:event_jComboBox1ActionPerformed
     private void actualizarTabla() {
+        String filtroCategoria = jComboBox1.getSelectedItem().toString();
+        List<Producto> productosFiltrados = recalc.filtrarTabla("", filtroCategoria);
+        recalc.actualizarTabla(productosFiltrados);
         jTable1.setModel(recalc.getModel());
-        recalc.actualizarTabla();
     }
     /**
      * @param args the command line arguments
